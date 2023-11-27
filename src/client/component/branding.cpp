@@ -39,7 +39,7 @@ namespace branding
 			{
 				localized_strings::override("LUA_MENU_MULTIPLAYER_CAPS", "S1x: MULTIPLAYER\n");
 			}
-			localized_strings::override("LUA_MENU_LEGAL_COPYRIGHT", "S1x: " VERSION);
+			localized_strings::override("LUA_MENU_LEGAL_COPYRIGHT", "");
 
 			dvars::override::set_string("version", utils::string::va("S1x %s", VERSION));
 
@@ -52,7 +52,7 @@ namespace branding
 				const auto y = 4;
 				const auto scale = 1.0f;
 				float color[4] = {0.666f, 0.666f, 0.666f, 0.666f};
-				const auto* text = "S1x: " VERSION;
+				const auto* text = "";
 
 				auto* font = game::R_RegisterFont("fonts/consolefont");
 
