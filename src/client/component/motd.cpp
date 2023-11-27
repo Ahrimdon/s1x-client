@@ -49,16 +49,16 @@ namespace motd
 	public:
 		void post_load() override
 		{
-			motd_future = utils::http::get_data_async("https://xlabs.dev/s1/motd.txt");
+			motd_future = utils::http::get_data_async("https://alterware.dev/s1/motd.txt");
 			std::thread([]
 			{
-				auto data = utils::http::get_data("https://xlabs.dev/s1/motd.png");
+				auto data = utils::http::get_data("https://alterware.dev/s1/motd.png");
 				if (data.has_value())
 				{
 					images::override_texture("iotd_image", data.value());
 				}
 
-				auto featured_optional = utils::http::get_data("https://xlabs.dev/s1/featured_msg.json");
+				auto featured_optional = utils::http::get_data("https://alterware.dev/s1/featured_msg.json");
 				if (featured_optional.has_value())
 				{
 					marketing_featured = featured_optional.value();
