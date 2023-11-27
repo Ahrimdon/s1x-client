@@ -1,3 +1,21 @@
+local isclasslocked = Cac.IsCustomClassLocked
+Cac.IsCustomClassLocked = function(...)
+	if (Engine.GetDvarBool("cg_unlockall_classes")) then
+		return false
+	end
+
+	return isclasslocked(table.unpack({ ... }))
+end
+
+local isdlcclasslocked = Cac.IsCustomClassDlcLocked
+Cac.IsCustomClassDlcLocked = function(...)
+	if (Engine.GetDvarBool("cg_unlockall_classes")) then
+		return false
+	end
+
+	return isdlcclasslocked(table.unpack({ ... }))
+end
+
 if (game:issingleplayer() or not Engine.InFrontend()) then
 	return
 end
@@ -20,7 +38,6 @@ game:addlocalizedstring("LUA_MENU_RANK_DESC", "Edit rank.")
 
 local armorybutton = LUI.MPLobbyBase.AddArmoryButton
 LUI.MPLobbyBase.AddArmoryButton = function(menu)
-	armorybutton(menu)
 	menu:AddButton("@LUA_MENU_STATS", function(a1, a2)
 		LUI.FlowManager.RequestAddMenu(a1, "menu_stats", true, nil)
 	end)
@@ -174,22 +191,4 @@ function CreateEditButton(menu, dvar, name, desc, callback)
 	end, function()
 		GoDirection(dvar, "up", callback)
 	end)
-end
-
-local isclasslocked = Cac.IsCustomClassLocked
-Cac.IsCustomClassLocked = function(...)
-	if (Engine.GetDvarBool("cg_unlockall_classes")) then
-		return false
-	end
-
-	return isclasslocked(table.unpack({...}))
-end
-
-local isdlcclasslocked = Cac.IsCustomClassDlcLocked
-Cac.IsCustomClassDlcLocked = function(...)
-	if (Engine.GetDvarBool("cg_unlockall_classes")) then
-		return false
-	end
-
-	return isdlcclasslocked(table.unpack({...}))
 end
